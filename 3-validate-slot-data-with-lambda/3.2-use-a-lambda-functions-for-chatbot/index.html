@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.134.0">
+    <meta name="description" content="">
+<meta name="author" content="21133048@student.hcmute.edu.vn">
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Use a Lambda functions for chatbot :: AMAZON LEX WORKSHOP</title>
+
+    
+    <link href="/css/nucleus.css?1726993342" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1726993342" rel="stylesheet">
+    <link href="/css/hybrid.css?1726993342" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1726993342" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1726993342" rel="stylesheet">
+    <link href="/css/auto-complete.css?1726993342" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1726993342" rel="stylesheet">
+    <link href="/css/theme.css?1726993342" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1726993342" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1726993342" rel="stylesheet">
+    
+    
+
+    <script src="/js/jquery-3.3.1.min.js?1726993342"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/3-validate-slot-data-with-lambda/3.2-use-a-lambda-functions-for-chatbot/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1726993342"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1726993342"></script>
+<script type="text/javascript">
+    
+        var baseurl = "http:\/\/Khoadora.github.io\/";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1726993342"></script>
+
+    
+  </div>
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-introduce/" title="Introduction" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/1-introduce/">
+           <b> 1. </b> Introduction
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-build-a-chatbot/" title="Build a ChatBot to order Fried Chicken" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-build-a-chatbot/">
+           <b> 2. </b> Build a ChatBot to order Fried Chicken
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-build-a-chatbot/2.1-create-bot-and-configure/" title="Create bot and Configure" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-build-a-chatbot/2.1-create-bot-and-configure/">
+           <b> 2.1 </b> Create bot and Configure
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-build-a-chatbot/2.2-create-intent-and-slot-types/" title="Create Intent and Slot types" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-build-a-chatbot/2.2-create-intent-and-slot-types/">
+           <b> 2.2 </b> Create Intent and Slot types
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.1.-create-intent-greeting/" title="Create intent Greeting" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.1.-create-intent-greeting/">
+           <b> 2.2.1 </b> Create intent Greeting
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.2.-create-intent-friedchickenorder-and-slot-type-friedchickensize/" title="Create intent FriedChickenOrder and Slot types FriedChickenSize" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.2.-create-intent-friedchickenorder-and-slot-type-friedchickensize/">
+           <b> 2.2.2 </b> Create intent FriedChickenOrder and Slot types FriedChickenSize
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.3.-create-intent-kfc_branch-and-slot-types-kfc_types/" title="Create intent KFC_branch and Slot types KFC_types" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.3.-create-intent-kfc_branch-and-slot-types-kfc_types/">
+           <b> 2.2.3 </b> Create intent KFC_branch and Slot types KFC_types
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.4.-create-intent-jollipee_branch-and-slot-types-jollipee_types/" title="Create intent Jollipee_branch and Slot types Jollipee_types" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.4.-create-intent-jollipee_branch-and-slot-types-jollipee_types/">
+           <b> 2.2.4 </b> Create intent Jollipee_branch and Slot types Jollipee_types
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.5.-create-intent-texas_branch-and-slot-types-texas_types/" title="Create intent Texas_branch and Slot types Texas_types" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.5.-create-intent-texas_branch-and-slot-types-texas_types/">
+           <b> 2.2.5 </b> Create intent Texas_branch and Slot types Texas_types
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.6.-create-intent-sideorder-and-slot-types-side_types/" title="Create intent SideOrder and Slot types Side_types" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.6.-create-intent-sideorder-and-slot-types-side_types/">
+           <b> 2.2.6 </b> Create intent SideOrder and Slot types Side_types
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.7.-create-intent-drinkorder-and-slot-types-drink_types/" title="Create intent DrinkOrder and Slot types Drink_types" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.7.-create-intent-drinkorder-and-slot-types-drink_types/">
+           <b> 2.2.7 </b> Create intent DrinkOrder and Slot types Drink_types
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.8.-configure-intent-fallbackintent/" title="Configure intent FallbackIntent" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/2-build-a-chatbot/2.2-create-intent-and-slot-types/2.2.8.-configure-intent-fallbackintent/">
+           <b> 2.2.8 </b> Configure intent FallbackIntent
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-validate-slot-data-with-lambda/" title="Validate Slot data with Lambda" class="dd-item 
+        parent
+        
+        
+        ">
+      <a href="/3-validate-slot-data-with-lambda/">
+           <b> 3. </b> Validate Slot data with Lambda
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-validate-slot-data-with-lambda/3.1-rebuilding-a-simpler-chatbot/" title="Rebuilding a simpler chatbot" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/3-validate-slot-data-with-lambda/3.1-rebuilding-a-simpler-chatbot/">
+           <b> 3.1. </b> Rebuilding a simpler chatbot
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-validate-slot-data-with-lambda/3.2-use-a-lambda-functions-for-chatbot/" title="Use a Lambda functions for chatbot" class="dd-item 
+        
+        active
+        
+        ">
+      <a href="/3-validate-slot-data-with-lambda/3.2-use-a-lambda-functions-for-chatbot/">
+           <b> 3.2. </b> Use a Lambda functions for chatbot
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-integrate-chatbot-into-a-web-page/" title="Integrate ChatBot into a Web Page" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/4-integrate-chatbot-into-a-web-page/">
+           <b> 4.</b> Integrate ChatBot into a Web Page
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-add-response-cards/" title="Add Response Cards" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/5-add-response-cards/">
+           <b> 5. </b> Add Response Cards
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/6-slack-integration/" title="Slack Integration" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/6-slack-integration/">
+           <b> 6. </b> Slack Integration
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/7-clear-up/" title="Clear up" class="dd-item 
+        
+        
+        
+        ">
+      <a href="/7-clear-up/">
+           <b> 7. </b> Clear up
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+         
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li> 
+                  <a class="padding" href="https://aws.amazon.com/blogs"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li> 
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - FB Group</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="http://Khoadora.github.io/3-validate-slot-data-with-lambda/3.2-use-a-lambda-functions-for-chatbot/" selected>English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="http://Khoadora.github.io/vi/3-validate-slot-data-with-lambda/3.2-use-a-lambda-functions-for-chatbot/">Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+      
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    
+     <b> Workshop</b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7920860&style=0038&nbdigits=9&type=page&initCount=0" title="Migrate" Alt="web counter"   border="0" /></a>  <br>
+     <b> <a href="https://cloudjourney.awsstudygroup.com/">Cloud Journey</a></b> <br>
+    <img src="https://hitwebcounter.com/counter/counter.php?page=7830807&style=0038&nbdigits=9&type=page&initCount=0" title="Total CLoud Journey" Alt="web counter"   border="0"   />
+     
+</left>
+<left>
+    <br>
+    <br>
+        <b> Last Updated </b> <br>
+        <i><font color=orange>21-09-2024</font></i>
+    </left>
+    <left>
+        <br>
+        <br>
+            <b> Team </b> <br>
+           
+            <i> <a href="https://www.linkedin.com/in/ph%C6%B0%C6%A1ng-khoa-nguy%E1%BB%85n-4377472a4/"  style="color:orange">Nguyễn Phương Khoa - 21133048  </a> <br>
+               
+        </i>
+        </left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>Amazon Lex Workshops</a> > <a href='/3-validate-slot-data-with-lambda/'>Validate Slot data with Lambda</a> > Use a Lambda functions for chatbot
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#task-1-create-lambda-function">Task 1: Create Lambda function</a></li>
+        <li><a href="#task-2-add-lambda-function-in-chatbot">Task 2: Add Lambda function in chatbot</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Use a Lambda functions for chatbot
+            </h1>
+          
+
+        
+
+
+
+	<ul>
+<li>Here we will add a Lambda function to the FriedChickenFriend_Simple chatbot to validate user input.</li>
+<li>I put the code Lambda functions at the bottom of the page, you can scroll down to the bottom to see it or follow the link for reference: <a href="https://github.com/Khoadora/Code_Amazon_Lex_workshop">Code Lambda function</a></li>
+</ul>
+<p><strong>Content</strong>:</p>
+<ul>
+<li>Create Lambda function.</li>
+<li>Add Lambda function in chatbot.</li>
+</ul>
+<h3 id="task-1-create-lambda-function">Task 1: Create Lambda function</h3>
+<ul>
+<li>
+<p>Go to <a href="https://us-east-1.console.aws.amazon.com/lambda/home?region=us-east-1#/begin">AWS Lambda</a></p>
+</li>
+<li>
+<p>Click <strong>Create a function</strong>.
+<img alt="conf" src="/image/3/15.jpg"></p>
+</li>
+<li>
+<p>Click <strong>Author from scratch</strong>.</p>
+</li>
+<li>
+<p><strong>Function name</strong> is  <em>FriedChickenOrder</em>.</p>
+</li>
+<li>
+<p><strong>Runtime</strong> select <em>Python 3.12</em>.</p>
+</li>
+<li>
+<p><strong>Architecture</strong> select <em>x86_64</em>.</p>
+</li>
+<li>
+<p>Click <strong>Create function</strong>.
+<img alt="conf" src="/image/3/16.jpg">
+Below is the image of the result after initialization:
+<img alt="conf" src="/image/3/28.jpg"></p>
+</li>
+</ul>
+<p>Next we will code the Lambda function for our chatbot. I have prepared it and now I will state the function of each code segment:</p>
+<ol>
+<li>Importing Dependencies</li>
+</ol>
+<ul>
+<li>The json module is imported. This module is typically used to handle JSON data, such as parsing or serializing JSON objects.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span></code></pre></div><ol start="2">
+<li>Defining Variables</li>
+</ol>
+<p>These variables define available options for sizes, fried chicken branches (KFC, Jollibee, Texas), and the respective chicken types for each branch.</p>
+<ul>
+<li><code>FriedChickenSizes</code> lists the available size options.</li>
+<li><code>FriedChicken_branch</code> lists the available fast-food chains.</li>
+<li><code>KFC_types</code>, <code>Jollipee_types</code>, and <code>Texas_types</code> store the different chicken types specific to each branch.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>friedChickenSizes <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;small&#39;</span>, <span style="color:#e6db74">&#39;medium&#39;</span>, <span style="color:#e6db74">&#39;large&#39;</span>, <span style="color:#e6db74">&#39;family size&#39;</span>]
+</span></span><span style="display:flex;"><span>friedChicken_branch <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;kfc&#39;</span>, <span style="color:#e6db74">&#39;jollipee&#39;</span>, <span style="color:#e6db74">&#39;texas&#39;</span>]
+</span></span><span style="display:flex;"><span>kfc_types <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;original&#39;</span>, <span style="color:#e6db74">&#39;extra crispy&#39;</span>, <span style="color:#e6db74">&#39;hot &amp; spicy&#39;</span>]
+</span></span><span style="display:flex;"><span>jollipee_types <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;classic&#39;</span>, <span style="color:#e6db74">&#39;spicy&#39;</span>, <span style="color:#e6db74">&#39;sweet chili&#39;</span>]
+</span></span><span style="display:flex;"><span>texas_types <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;smoky bbq&#39;</span>, <span style="color:#e6db74">&#39;cajun spice&#39;</span>, <span style="color:#e6db74">&#39;honey butter&#39;</span>]
+</span></span></code></pre></div><ol start="3">
+<li>Defining the validate_order Function</li>
+</ol>
+<ul>
+<li>This function validates the input received from the user through a chatbot. It checks if the provided values for size, branch, and type of fried chicken are valid.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">validate_order</span>(slots):
+</span></span></code></pre></div><p>3.1 Validation of FriedChickenSizes</p>
+<ul>
+<li>First check: If the FriedChickenSizes slot is empty, it marks this slot as invalid and returns an appropriate response to prompt the user to select a size.</li>
+<li>Second check: It then verifies whether the selected size exists in the FriedChickenSizes list. If it doesn’t, it prompts the user with a message asking to select one of the valid options.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">validate_order</span>(slots):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Validate FriedChickenSizes</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;FriedChickenSizes&#39;</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> slots <span style="color:#f92672">or</span> <span style="color:#f92672">not</span> slots[<span style="color:#e6db74">&#39;FriedChickenSizes&#39;</span>]:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Validating FriedChickenSizes Slot&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChickenSizes&#39;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> slots[<span style="color:#e6db74">&#39;FriedChickenSizes&#39;</span>][<span style="color:#e6db74">&#39;value&#39;</span>][<span style="color:#e6db74">&#39;originalValue&#39;</span>]<span style="color:#f92672">.</span>lower() <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> friedChickenSizes:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Invalid FriedChickenSizes&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChickenSizes&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;Please select a </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> burger size.&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">.</span>join(friedChickenSizes))
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><p>3.2 Validation of FriedChicken_branch and FriedChickenType</p>
+<ul>
+<li>First check: Similar to the previous check, this part checks if the FriedChicken_branch slot is provided.</li>
+<li>Second check: It then validates whether the provided branch (e.g., KFC, Jollibee) exists in the FriedChicken_branch list. If it&rsquo;s invalid, a prompt is returned to select from valid branches.</li>
+<li>First check: This part checks if the FriedChicken_Types slot is provided.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Validate FriedChicken_branch</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;FriedChicken_branch&#39;</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> slots <span style="color:#f92672">or</span> <span style="color:#f92672">not</span> slots[<span style="color:#e6db74">&#39;FriedChicken_branch&#39;</span>]:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Validating FriedChicken_branch Slot&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChicken_branch&#39;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> slots[<span style="color:#e6db74">&#39;FriedChicken_branch&#39;</span>][<span style="color:#e6db74">&#39;value&#39;</span>][<span style="color:#e6db74">&#39;originalValue&#39;</span>]<span style="color:#f92672">.</span>lower() <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> friedChicken_branch:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Invalid FriedChicken_branch&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChicken_branch&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;Please select from </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> burger franchises.&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">.</span>join(friedChicken_branch))
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Validate FriedChicken_Types</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;FriedChicken_Types&#39;</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> slots <span style="color:#f92672">or</span> <span style="color:#f92672">not</span> slots[<span style="color:#e6db74">&#39;FriedChicken_Types&#39;</span>]:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Validating FriedChicken_Types Slot&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChicken_Types&#39;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><p>3.3 Validation of FriedChicken_Types Based on Branch and Valid Order Case</p>
+<ul>
+<li>This section ensures that the user’s selected  <code>FriedChickenType</code> is valid for the specific branch they chose (KFC, Jollibee, Texas). If a type is invalid, the chatbot prompts the user to choose a valid option for the selected branch.</li>
+<li>If all the above checks pass, the function returns {&lsquo;isValid&rsquo;: True} indicating the order is valid.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e"># Validate FriedChicken_Types for FriedChicken_branch</span>
+</span></span><span style="display:flex;"><span>    branch_value <span style="color:#f92672">=</span> slots[<span style="color:#e6db74">&#39;FriedChicken_branch&#39;</span>][<span style="color:#e6db74">&#39;value&#39;</span>][<span style="color:#e6db74">&#39;originalValue&#39;</span>]<span style="color:#f92672">.</span>lower()
+</span></span><span style="display:flex;"><span>    type_value <span style="color:#f92672">=</span> slots[<span style="color:#e6db74">&#39;FriedChicken_Types&#39;</span>][<span style="color:#e6db74">&#39;value&#39;</span>][<span style="color:#e6db74">&#39;originalValue&#39;</span>]<span style="color:#f92672">.</span>lower()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> branch_value <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;kfc&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> type_value <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> kfc_types:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;Invalid FriedChicken_Types for KFC&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChicken_Types&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;Please select a KFC type of </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">.&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">.</span>join(kfc_types))
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> branch_value <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;jollipee&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> type_value <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> jollipee_types:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;Invalid FriedChicken_Types for Jollipee&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChicken_Types&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;Please select a Jollipee type of </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">.&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">.</span>join(jollipee_types))
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> branch_value <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;texas&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> type_value <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> texas_types:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;Invalid FriedChicken_Types for Texas&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChicken_Types&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;Please select a Texas type of </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">.&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">.</span>join(texas_types))
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Valid Order</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">True</span>}
+</span></span></code></pre></div><ol start="4">
+<li>Defining the lambda_handler Function</li>
+</ol>
+<p>The lambda_handler function handles incoming events (from a chatbot, for example). It receives two arguments:</p>
+<ul>
+<li><code>event</code>: The event details, including the slots that contain the user`s order information.</li>
+<li><code>context</code>: The runtime information for the Lambda function (not used here).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lambda_handler</span>(event, context):
+</span></span><span style="display:flex;"><span>    print(event)
+</span></span></code></pre></div><p>4.1 Extracting Information from Event and  validating the Order</p>
+<ul>
+<li>The bot`s name, slots, and intent name are extracted from the event object.</li>
+<li>The <code>validate_order</code> function is called to validate the user`s input (contained in <code>slots</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lambda_handler</span>(event, context):
+</span></span><span style="display:flex;"><span>    print(event)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    bot <span style="color:#f92672">=</span> event[<span style="color:#e6db74">&#39;bot&#39;</span>][<span style="color:#e6db74">&#39;name&#39;</span>]
+</span></span><span style="display:flex;"><span>    slots <span style="color:#f92672">=</span> event[<span style="color:#e6db74">&#39;sessionState&#39;</span>][<span style="color:#e6db74">&#39;intent&#39;</span>][<span style="color:#e6db74">&#39;slots&#39;</span>]
+</span></span><span style="display:flex;"><span>    intent <span style="color:#f92672">=</span> event[<span style="color:#e6db74">&#39;sessionState&#39;</span>][<span style="color:#e6db74">&#39;intent&#39;</span>][<span style="color:#e6db74">&#39;name&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    order_validation_result <span style="color:#f92672">=</span> validate_order(slots)
+</span></span></code></pre></div><p>4.2 Handling the Response for DialogCodeHook
+If the source of invocation is <code>DialogCodeHook</code>, meaning the chatbot is still gathering information, it either:</p>
+<ul>
+<li>Prompts the user to correct an invalid slot.</li>
+<li>Delegates control to the next step if everything is valid.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    <span style="color:#75715e">#Handling the Response for DialogCodeHook</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> event[<span style="color:#e6db74">&#39;invocationSource&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;DialogCodeHook&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> order_validation_result[<span style="color:#e6db74">&#39;isValid&#39;</span>]:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;message&#39;</span> <span style="color:#f92672">in</span> order_validation_result:
+</span></span><span style="display:flex;"><span>                response <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;sessionState&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;dialogAction&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;slotToElicit&#34;</span>: order_validation_result[<span style="color:#e6db74">&#39;invalidSlot&#39;</span>],
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;ElicitSlot&#34;</span>
+</span></span><span style="display:flex;"><span>                        },
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;intent&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;name&#34;</span>: intent,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;slots&#34;</span>: slots
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;messages&#34;</span>: [
+</span></span><span style="display:flex;"><span>                        {
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;contentType&#34;</span>: <span style="color:#e6db74">&#34;PlainText&#34;</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;content&#34;</span>: order_validation_result[<span style="color:#e6db74">&#39;message&#39;</span>]
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    ]
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                response <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;sessionState&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;dialogAction&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;slotToElicit&#34;</span>: order_validation_result[<span style="color:#e6db74">&#39;invalidSlot&#39;</span>],
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;ElicitSlot&#34;</span>
+</span></span><span style="display:flex;"><span>                        },
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;intent&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;name&#34;</span>: intent,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;slots&#34;</span>: slots
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            response <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;sessionState&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;dialogAction&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;Delegate&#34;</span>
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;intent&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#39;name&#39;</span>: intent,
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#39;slots&#39;</span>: slots
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span></code></pre></div><p>4.3 Handling FulfillmentCodeHook</p>
+<ul>
+<li>If the source of invocation is <code>FulfillmentCodeHook</code>, it closes the interaction and confirms that the order has been placed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    <span style="color:#75715e">#Handling FulfillmentCodeHook</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> event[<span style="color:#e6db74">&#39;invocationSource&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;FulfillmentCodeHook&#39;</span>:
+</span></span><span style="display:flex;"><span>        response <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;sessionState&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;dialogAction&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;Close&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;intent&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;name&#34;</span>: intent,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;slots&#34;</span>: slots,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;state&#34;</span>: <span style="color:#e6db74">&#34;Fulfilled&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;messages&#34;</span>: [
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;contentType&#34;</span>: <span style="color:#e6db74">&#34;PlainText&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;content&#34;</span>: <span style="color:#e6db74">&#34;I&#39;ve placed your order.&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ol start="5">
+<li>Returning the Response</li>
+</ol>
+<ul>
+<li>Finally, the response is printed for debugging purposes and returned to the caller (chatbot or user).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>    print(response)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> response
+</span></span></code></pre></div><ul>
+<li>After adding the code to the <strong>Lambda function</strong>, enter <strong>Deploy</strong> to build.
+<img alt="conf" src="/image/3/29.jpg"></li>
+</ul>
+<h3 id="task-2-add-lambda-function-in-chatbot">Task 2: Add Lambda function in chatbot</h3>
+<ul>
+<li>Go back to the <strong>FriedChickenFriend_Sample</strong> chatbot. Select the <strong>OrderFriedChicken</strong> intent.
+<img alt="conf" src="/image/3/30.jpg"></li>
+<li>Scroll down to <strong>Code hooks</strong>, select <strong>Use a Lambda function for initialization and validation</strong>.
+<img alt="conf" src="/image/3/31.jpg"></li>
+<li>Scroll up to <strong>Confirmation</strong>, select <strong>Advanced options</strong>.
+<img alt="conf" src="/image/3/32.jpg"></li>
+<li>Scroll down to <strong>Dialog code hook</strong>, select <strong>Invoke Lambda function</strong>, make sure <strong>Active</strong> mode is turned on.</li>
+<li>Select <strong>Update options</strong>.
+<img alt="conf" src="/image/3/33.jpg"></li>
+<li>Scroll down to <strong>Fulfillment</strong>, select <strong>Advanced options</strong>.
+<img alt="conf" src="/image/3/34.jpg"></li>
+<li>Select <strong>Use a Lambda function for fulfillment</strong>.</li>
+<li>Select <strong>Update options</strong>.
+<img alt="conf" src="/image/3/35.jpg"></li>
+<li>Enter <strong>Build</strong> and <strong>Test</strong>.</li>
+<li>Select <strong>Setting</strong> in chatbot.</li>
+<li>In <strong>Source</strong> select function <em>FriedChickenOrder</em>.</li>
+<li>Click <strong>Save</strong>.
+<img alt="conf" src="/image/3/36.jpg"></li>
+<li>Next I will test the chatbot with some messages as shown below.</li>
+<li>Looking at the <strong>Summary</strong>, the input values ​​that I texted are <code>medium</code>, <code>KFC</code>, <code>original</code> have been added to the <strong>Elicitation</strong> column corresponding to each slot.</li>
+<li>When I selected <strong>smoky bbq</strong> from KFC, the bot noticed something was wrong so it rejected and asked me to select again, that is the application of <strong>the Lambda function</strong>.
+<img alt="conf" src="/image/3/37.jpg">
+<img alt="conf" src="/image/3/38.jpg"></li>
+</ul>
+<p>
+<div class="notices note" ><p>When I replied <code>Yes</code>, the bot responded with <code>I've placed your order</code> , which was different from the message that was set in <strong>Fullfilment</strong> initially. I did this so that I could see that the processing was done by Lambda.</p>
+</div>
+
+<img alt="conf" src="/image/3/39.jpg"></p>
+<h4 id="the-full-code-for-the-lambda-function">The full code for the Lambda function:</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> json
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>friedChickenSizes <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;small&#39;</span>, <span style="color:#e6db74">&#39;medium&#39;</span>, <span style="color:#e6db74">&#39;large&#39;</span>, <span style="color:#e6db74">&#39;family size&#39;</span>]
+</span></span><span style="display:flex;"><span>friedChicken_branch <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;kfc&#39;</span>, <span style="color:#e6db74">&#39;jollipee&#39;</span>, <span style="color:#e6db74">&#39;texas&#39;</span>]
+</span></span><span style="display:flex;"><span>kfc_types <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;original&#39;</span>, <span style="color:#e6db74">&#39;extra crispy&#39;</span>, <span style="color:#e6db74">&#39;hot &amp; spicy&#39;</span>]
+</span></span><span style="display:flex;"><span>jollipee_types <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;classic&#39;</span>, <span style="color:#e6db74">&#39;spicy&#39;</span>, <span style="color:#e6db74">&#39;sweet chili&#39;</span>]
+</span></span><span style="display:flex;"><span>texas_types <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;smoky bbq&#39;</span>, <span style="color:#e6db74">&#39;cajun spice&#39;</span>, <span style="color:#e6db74">&#39;honey butter&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">validate_order</span>(slots):
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Validate FriedChickenSizes</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;FriedChickenSizes&#39;</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> slots <span style="color:#f92672">or</span> <span style="color:#f92672">not</span> slots[<span style="color:#e6db74">&#39;FriedChickenSizes&#39;</span>]:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Validating FriedChickenSizes Slot&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChickenSizes&#39;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> slots[<span style="color:#e6db74">&#39;FriedChickenSizes&#39;</span>][<span style="color:#e6db74">&#39;value&#39;</span>][<span style="color:#e6db74">&#39;originalValue&#39;</span>]<span style="color:#f92672">.</span>lower() <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> friedChickenSizes:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Invalid FriedChickenSizes&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChickenSizes&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;Please select a </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> burger size.&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">.</span>join(friedChickenSizes))
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Validate FriedChicken_branch</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;FriedChicken_branch&#39;</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> slots <span style="color:#f92672">or</span> <span style="color:#f92672">not</span> slots[<span style="color:#e6db74">&#39;FriedChicken_branch&#39;</span>]:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Validating FriedChicken_branch Slot&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChicken_branch&#39;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> slots[<span style="color:#e6db74">&#39;FriedChicken_branch&#39;</span>][<span style="color:#e6db74">&#39;value&#39;</span>][<span style="color:#e6db74">&#39;originalValue&#39;</span>]<span style="color:#f92672">.</span>lower() <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> friedChicken_branch:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Invalid FriedChicken_branch&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChicken_branch&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;Please select from </span><span style="color:#e6db74">{}</span><span style="color:#e6db74"> burger franchises.&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">.</span>join(friedChicken_branch))
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Validate FriedChicken_Types</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;FriedChicken_Types&#39;</span> <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> slots <span style="color:#f92672">or</span> <span style="color:#f92672">not</span> slots[<span style="color:#e6db74">&#39;FriedChicken_Types&#39;</span>]:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">&#39;Validating FriedChicken_Types Slot&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChicken_Types&#39;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Validate FriedChicken_Types for FriedChicken_branch</span>
+</span></span><span style="display:flex;"><span>    branch_value <span style="color:#f92672">=</span> slots[<span style="color:#e6db74">&#39;FriedChicken_branch&#39;</span>][<span style="color:#e6db74">&#39;value&#39;</span>][<span style="color:#e6db74">&#39;originalValue&#39;</span>]<span style="color:#f92672">.</span>lower()
+</span></span><span style="display:flex;"><span>    type_value <span style="color:#f92672">=</span> slots[<span style="color:#e6db74">&#39;FriedChicken_Types&#39;</span>][<span style="color:#e6db74">&#39;value&#39;</span>][<span style="color:#e6db74">&#39;originalValue&#39;</span>]<span style="color:#f92672">.</span>lower()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> branch_value <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;kfc&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> type_value <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> kfc_types:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;Invalid FriedChicken_Types for KFC&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChicken_Types&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;Please select a KFC type of </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">.&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">.</span>join(kfc_types))
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> branch_value <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;jollipee&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> type_value <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> jollipee_types:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;Invalid FriedChicken_Types for Jollipee&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChicken_Types&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;Please select a Jollipee type of </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">.&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">.</span>join(jollipee_types))
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elif</span> branch_value <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;texas&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> type_value <span style="color:#f92672">not</span> <span style="color:#f92672">in</span> texas_types:
+</span></span><span style="display:flex;"><span>            print(<span style="color:#e6db74">&#39;Invalid FriedChicken_Types for Texas&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">False</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;invalidSlot&#39;</span>: <span style="color:#e6db74">&#39;FriedChicken_Types&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;message&#39;</span>: <span style="color:#e6db74">&#39;Please select a Texas type of </span><span style="color:#e6db74">{}</span><span style="color:#e6db74">.&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#e6db74">&#34;, &#34;</span><span style="color:#f92672">.</span>join(texas_types))
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Valid Order</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#39;isValid&#39;</span>: <span style="color:#66d9ef">True</span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lambda_handler</span>(event, context):
+</span></span><span style="display:flex;"><span>    print(event)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    bot <span style="color:#f92672">=</span> event[<span style="color:#e6db74">&#39;bot&#39;</span>][<span style="color:#e6db74">&#39;name&#39;</span>]
+</span></span><span style="display:flex;"><span>    slots <span style="color:#f92672">=</span> event[<span style="color:#e6db74">&#39;sessionState&#39;</span>][<span style="color:#e6db74">&#39;intent&#39;</span>][<span style="color:#e6db74">&#39;slots&#39;</span>]
+</span></span><span style="display:flex;"><span>    intent <span style="color:#f92672">=</span> event[<span style="color:#e6db74">&#39;sessionState&#39;</span>][<span style="color:#e6db74">&#39;intent&#39;</span>][<span style="color:#e6db74">&#39;name&#39;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    order_validation_result <span style="color:#f92672">=</span> validate_order(slots)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> event[<span style="color:#e6db74">&#39;invocationSource&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;DialogCodeHook&#39;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> order_validation_result[<span style="color:#e6db74">&#39;isValid&#39;</span>]:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;message&#39;</span> <span style="color:#f92672">in</span> order_validation_result:
+</span></span><span style="display:flex;"><span>                response <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;sessionState&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;dialogAction&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;slotToElicit&#34;</span>: order_validation_result[<span style="color:#e6db74">&#39;invalidSlot&#39;</span>],
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;ElicitSlot&#34;</span>
+</span></span><span style="display:flex;"><span>                        },
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;intent&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;name&#34;</span>: intent,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;slots&#34;</span>: slots
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;messages&#34;</span>: [
+</span></span><span style="display:flex;"><span>                        {
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;contentType&#34;</span>: <span style="color:#e6db74">&#34;PlainText&#34;</span>,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;content&#34;</span>: order_validation_result[<span style="color:#e6db74">&#39;message&#39;</span>]
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    ]
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>                response <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;sessionState&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;dialogAction&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;slotToElicit&#34;</span>: order_validation_result[<span style="color:#e6db74">&#39;invalidSlot&#39;</span>],
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;ElicitSlot&#34;</span>
+</span></span><span style="display:flex;"><span>                        },
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;intent&#34;</span>: {
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;name&#34;</span>: intent,
+</span></span><span style="display:flex;"><span>                            <span style="color:#e6db74">&#34;slots&#34;</span>: slots
+</span></span><span style="display:flex;"><span>                        }
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>            response <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;sessionState&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;dialogAction&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;Delegate&#34;</span>
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;intent&#34;</span>: {
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#39;name&#39;</span>: intent,
+</span></span><span style="display:flex;"><span>                        <span style="color:#e6db74">&#39;slots&#39;</span>: slots
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> event[<span style="color:#e6db74">&#39;invocationSource&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;FulfillmentCodeHook&#39;</span>:
+</span></span><span style="display:flex;"><span>        response <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;sessionState&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;dialogAction&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;Close&#34;</span>
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;intent&#34;</span>: {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;name&#34;</span>: intent,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;slots&#34;</span>: slots,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;state&#34;</span>: <span style="color:#e6db74">&#34;Fulfilled&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            },
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;messages&#34;</span>: [
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;contentType&#34;</span>: <span style="color:#e6db74">&#34;PlainText&#34;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#e6db74">&#34;content&#34;</span>: <span style="color:#e6db74">&#34;I&#39;ve placed your order.&#34;</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            ]
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    print(response)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> response
+</span></span></code></pre></div>
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div> 
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+        
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+        
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/3-validate-slot-data-with-lambda/3.1-rebuilding-a-simpler-chatbot/" title="Rebuilding a simpler chatbot"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/4-integrate-chatbot-into-a-web-page/" title="Integrate ChatBot into a Web Page" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+    
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1726993342"></script>
+    <script src="/js/perfect-scrollbar.min.js?1726993342"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1726993342"></script>
+    <script src="/js/jquery.sticky.js?1726993342"></script>
+    <script src="/js/featherlight.min.js?1726993342"></script>
+    <script src="/js/highlight.pack.js?1726993342"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1726993342"></script>
+    <script src="/js/learn.js?1726993342"></script>
+    <script src="/js/hugo-learn.js?1726993342"></script>
+
+    <link href="/mermaid/mermaid.css?1726993342" rel="stylesheet" />
+    <script src="/mermaid/mermaid.js?1726993342"></script>
+    <script>
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-158079754-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  </body>
+</html>
